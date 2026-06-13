@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BhoomiVeda</title>
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row">
+        <div class="brand-mark">
+          <img src="assets/bhoomiveda-logo.png" alt="BhoomiVeda logo" />
+        </div>
+        <div class="brand-copy">
+          <div class="brand-name">Bhoomi<span>Veda</span></div>
+          <div class="brand-tag">Smart Farming Platform</div>
+        </div>
+      </div>
+
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Collapse sidebar">☰</button>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-page="dashboard">🏠 <span>Dashboard</span></button>
+        <button class="nav-item" data-page="ai-crop">🤖 <span>AI Crop Advisor</span></button>
+        <button class="nav-item" data-page="ask-expert">💬 <span>Ask Expert</span></button>
+        <button class="nav-item" data-page="community">👥 <span>Community</span></button>
+        <button class="nav-item" data-page="schemes">📄 <span>Gov. Schemes</span></button>
+        <button class="nav-item" data-page="profile">👤 <span>Profile</span></button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-chip">Live weather • market • soil insights</div>
+        <div class="sidebar-note">Built for farmers, experts and agriculture teams.</div>
+      </div>
+    </aside>
+
+    <div class="mobile-backdrop" id="mobileBackdrop"></div>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+          <div>
+            <div class="topbar-title">BhoomiVeda</div>
+            <div class="topbar-subtitle">AI-powered farming dashboard</div>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Search schemes, crops, posts..." />
+          </label>
+          <button class="icon-btn" id="notifBtn" aria-label="Notifications">🔔 <span class="badge">4</span></button>
+          <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">☾</button>
+          <button class="profile-pill" data-page="profile">
+            <span class="avatar">RJ</span>
+            <span class="hide-sm">Rajendra</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="page active" id="dashboard"></section>
+      <section class="page" id="ai-crop"></section>
+      <section class="page" id="ask-expert"></section>
+      <section class="page" id="community"></section>
+      <section class="page" id="schemes"></section>
+      <section class="page" id="profile"></section>
+    </main>
+
+    <div class="notifications-panel" id="notificationsPanel" hidden>
+      <div class="panel-header">
+        <span>Notifications</span>
+        <span class="panel-chip">4 new</span>
+      </div>
+      <div id="notificationList"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
