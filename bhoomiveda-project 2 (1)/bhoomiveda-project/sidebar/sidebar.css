@@ -1,0 +1,67 @@
+/* ============================================================
+   SIDEBAR.CSS — Modern, production-grade navigation styles.
+   ============================================================ */
+
+.bv-sidebar {
+  transition: transform .28s cubic-bezier(.4,0,.2,1),
+              box-shadow .28s ease;
+}
+
+/* Nav links --------------------------------------------------- */
+.bv-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgb(75 85 99);              /* gray-600 */
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, transform .15s ease, box-shadow .2s ease;
+}
+
+.bv-link:hover {
+  background: rgb(240 253 244);      /* green-50 */
+  color: rgb(21 128 61);             /* green-700 */
+}
+
+.bv-link:active { transform: scale(0.98); }
+
+.dark .bv-link { color: rgb(203 213 225); }
+.dark .bv-link:hover { background: rgba(34,197,94,.12); color: #fff; }
+
+/* Active item — clean highlighted pill */
+.bv-link.active {
+  background: linear-gradient(135deg, rgb(22 163 74) 0%, rgb(34 197 94) 100%);
+  color: #fff;
+  box-shadow: 0 8px 18px -10px rgba(34,197,94,.55);
+}
+.bv-link.active:hover {
+  background: linear-gradient(135deg, rgb(21 128 61) 0%, rgb(22 163 74) 100%);
+  color: #fff;
+}
+.dark .bv-link.active { color: #fff; }
+
+/* Subtle left indicator on active */
+.bv-link.active::before {
+  content: "";
+  position: absolute;
+  left: -0.75rem;
+  top: 18%;
+  bottom: 18%;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: rgb(134 239 172);
+}
+
+.bv-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  stroke-width: 2;
+}
+.bv-link span { line-height: 1.1; }

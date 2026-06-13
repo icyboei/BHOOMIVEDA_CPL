@@ -1,0 +1,17 @@
+/* ============================================================
+   HOME.CSS — small extras for the dashboard page.
+   Tailwind handles most styling; this file only holds rules
+   that are easier to write as plain CSS.
+   ============================================================ */
+
+/* Stat card hover lift */
+.bv-stat-card { transition: all .3s ease; }
+.bv-stat-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -16px rgba(0,0,0,.18); }
+
+/* Soil progress bar fill animation */
+.bv-bar-fill { transition: width .7s ease; }
+
+/* Crop pick card hover lift (reused on dashboard sidebar list) */
+.bv-pick-card { transition: all .3s ease; }
+.bv-pick-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -16px rgba(0,0,0,.18); }
+ 

@@ -1,0 +1,53 @@
+/* ============================================================
+   SHELL.CSS  —  Global styles shared by every page.
+   ============================================================ */
+
+/* Use DM Sans everywhere */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap");
+
+html, body { margin: 0; padding: 0; font-family: 'DM Sans', system-ui, sans-serif; }
+
+/* Simple fade-in for pages */
+@keyframes shellFadeIn { from { opacity: 0; transform: translateY(4px);} to { opacity: 1; transform: none; } }
+main { animation: shellFadeIn .25s ease-out; }
+
+/* Custom spinner used by buttons / GPS fetch */
+.spinner {
+  width: 0.75rem; height: 0.75rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 9999px;
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+}
+.spinner-lg { width: 1rem; height: 1rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Nicer scrollbar in webkit */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 8px; }
+.dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); }
+
+/* ============================================================
+   SMOOTH THEME TRANSITIONS
+   Applied to html element so transitions work on all children.
+   ============================================================ */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, box-shadow, fill;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* Exclude transitions on things that shouldn't animate */
+.bv-bar-fill,
+canvas,
+img,
+svg,
+[data-lucide] {
+  transition: none !important;
+}
+
+/* Re-allow transform transitions for hover effects */
+.bv-stat-card, .bv-pick-card, .bv-post, .bv-scheme {
+  transition: all .3s ease !important;
+}

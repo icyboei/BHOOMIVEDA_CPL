@@ -1,0 +1,79 @@
+/* Ask Expert page styles */
+.ae-msg { max-width: 85%; padding: 10px 12px; border-radius: 14px; font-size: 13px; line-height: 1.45; word-break: break-word; }
+.ae-msg-farmer { background: #16a34a; color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
+.ae-msg-ai     { background: #eff6ff; color: #1e3a8a; border: 1px solid #dbeafe; border-bottom-left-radius: 4px; }
+.ae-msg-expert { background: #fff7ed; color: #7c2d12; border: 1px solid #fed7aa; border-bottom-left-radius: 4px; }
+.dark .ae-msg-ai     { background: rgba(30,58,138,0.25); color:#bfdbfe; border-color: rgba(30,58,138,0.5); }
+.dark .ae-msg-expert { background: rgba(124,45,18,0.25); color:#fed7aa; border-color: rgba(124,45,18,0.5); }
+.ae-msg-meta { font-size: 10px; opacity: 0.7; margin-bottom: 2px; font-weight: 600; }
+.ae-msg img { border-radius: 8px; max-width: 100%; margin-top: 6px; display:block; }
+.ae-msg audio { width: 100%; margin-top: 6px; }
+.ae-photo-thumb { position:relative; width: 72px; height: 72px; border-radius: 10px; overflow:hidden; border:1px solid rgba(0,0,0,0.1); }
+.ae-photo-thumb img { width:100%; height:100%; object-fit:cover; }
+.ae-photo-thumb button { position:absolute; top:2px; right:2px; background:rgba(0,0,0,0.6); color:#fff; border-radius:999px; width:18px; height:18px; font-size:12px; line-height:1; display:flex; align-items:center; justify-content:center; }
+.ae-consult-card { transition: transform .15s ease, box-shadow .15s ease; }
+.ae-consult-card:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.ae-status-pill { font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px; white-space:nowrap; }
+.ae-status-waiting  { background:#fef3c7; color:#92400e; }
+.ae-status-replied  { background:#dbeafe; color:#1e40af; }
+.ae-status-resolved { background:#dcfce7; color:#166534; }
+.dark .ae-status-waiting  { background:rgba(146,64,14,0.25); color:#fcd34d; }
+.dark .ae-status-replied  { background:rgba(30,64,175,0.3);  color:#bfdbfe; }
+.dark .ae-status-resolved { background:rgba(22,101,52,0.3);  color:#bbf7d0; }
+
+/* ============================================================
+   Chat + Expert Video responsive layout
+   ------------------------------------------------------------
+   Mobile / tablet  : single column, video stacked below chat
+   Desktop (lg+)    : side-by-side chat (2fr) + video (1fr)
+   ============================================================ */
+.ae-chat-grid { display: flex; flex-direction: column; gap: 16px; }
+
+.ae-chat-panel { height: calc(100vh - 320px); min-height: 420px; }
+
+@media (min-width: 1024px) {
+  .ae-chat-grid { display: grid; grid-template-columns: 2fr 1fr; align-items: start; }
+  .ae-chat-panel { height: calc(100vh - 220px); min-height: 480px; }
+  .ae-video-card { position: sticky; top: 0; }
+}
+
+/* ---------- Expert Video card ---------- */
+.ae-video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0f172a;
+}
+.ae-video-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Fallback shown when no video / load error */
+.ae-video-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 16px;
+  color: #e5e7eb;
+  background-size: cover;
+  background-position: center;
+}
+.ae-video-fallback::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+}
+.ae-video-fallback i,
+.ae-video-fallback span { position: relative; z-index: 1; }
+.ae-video-fallback span { font-size: 12px; font-weight: 600; }

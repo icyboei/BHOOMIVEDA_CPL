@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — BhoomiVeda</title>
+  <link rel="icon" href="../assets/favicon.svg" />
+
+
+  <script src="../shared/tailwind-config.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="../shared/auth.js"></script>
+  <script src="../shared/language.js"></script>
+<script src="home.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+
+  <link rel="stylesheet" href="../shared/shell.css" />
+  <link rel="stylesheet" href="../shared/theme.css" />
+  <link rel="stylesheet" href="../sidebar/sidebar.css" />
+  <link rel="stylesheet" href="../navbar/navbar.css" />
+  <link rel="stylesheet" href="../ai-assistant/ai-assistant.css" />
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body data-protected="true" data-page="dashboard" data-page-title="Dashboard" data-page-title-key="dashboard"
+      class="bg-gray-50 dark:bg-gray-950 overflow-x-hidden">
+
+<div class="flex h-screen overflow-hidden">
+
+  <div data-include="../sidebar/sidebar.html" class="hidden md:flex"></div>
+
+  <div class="flex-1 flex flex-col overflow-hidden w-full">
+
+    <!-- Mobile Header -->
+    <div class="flex items-center justify-between md:hidden px-4 py-3 border-b bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800">
+      
+      <div class="flex items-center gap-2 min-w-0">
+        <button class="p-2 rounded-lg flex-shrink-0">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="h-8 w-8 overflow-hidden flex-shrink-0">
+            <img src="../assets/bhoomiveda-logo.png"
+                 alt=""
+                 class="w-full h-[200%] max-w-none object-contain object-top" />
+          </div>
+
+          <span class="font-extrabold uppercase tracking-[0.14em] leading-none text-[11px] sm:text-xs text-gray-900 dark:text-white truncate">
+            Bhoomi<span class="text-green-600">Veda</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Language Switch (mobile) — wired automatically by language.js -->
+      <div class="relative flex-shrink-0">
+        <select id="languageSwitcherMobile"
+                class="bv-lang-switcher bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs sm:text-sm px-2 sm:px-3 py-2 rounded-xl outline-none text-gray-700 dark:text-white w-[90px] sm:w-auto">
+          <option value="en">English</option>
+          <option value="hi">हिंदी</option>
+        </select>
+      </div>
+    </div>
+
+    <div data-include="../navbar/navbar.html"></div>
+
+    <main class="flex-1 overflow-y-auto overflow-x-hidden">
+      <div class="bg-gray-50 dark:bg-gray-900 min-h-screen p-3 sm:p-4 md:p-6">
+
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-r from-green-700 via-green-600 to-green-500 rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 mb-6 text-white relative overflow-hidden shadow-xl">
+          
+          <div class="absolute right-0 top-0 text-7xl sm:text-8xl md:text-9xl opacity-10 -mt-4 -mr-4 select-none">
+            🌾
+          </div>
+
+          <div class="absolute right-10 sm:right-20 md:right-24 bottom-0 text-4xl sm:text-5xl md:text-6xl opacity-10 mb-2 select-none">
+            🌱
+          </div>
+
+          <div class="relative z-10">
+
+            <p class="text-green-200 text-xs sm:text-sm font-medium mb-1"
+               data-i18n="goodMorning">
+               Good Morning 👋
+            </p>
+
+            <h1 id="bv-welcome-heading" class="text-xl sm:text-2xl md:text-3xl font-black mb-2 leading-tight">
+                Welcome Kisan 🌱
+            </h1>
+
+            <p id="bv-welcome-sub" class="text-green-100 text-xs sm:text-sm mb-4 max-w-2xl"
+               data-i18n="farmPerformance">
+               Your farm is performing 18% above average this season.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3 flex-wrap">
+
+              <button data-i18n="aiAdvice"
+                onclick="window.scrollTo(0,0); window.location.href='../ai-crop/index.html'"
+                class="w-full sm:w-auto bg-white text-green-700 px-4 py-2.5 rounded-xl text-sm font-bold hover:bg-green-50 transition-colors shadow-sm">
+                🤖 Get AI Advice
+              </button>
+
+              <button data-i18n="viewReport"
+                onclick="window.scrollTo(0,0); window.location.href='../ai-crop/index.html#reports'"
+                class="w-full sm:w-auto bg-green-800 bg-opacity-40 text-white px-4 py-2.5 rounded-xl text-sm font-semibold border border-white border-opacity-20 hover:bg-opacity-60 transition-colors">
+                📊 View Report
+              </button>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4 mb-6"
+             id="bv-stat-row">
+        </div>
+
+        <!-- Weather + Soil -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+
+          <!-- Weather -->
+          <div class="bg-gradient-to-br from-blue-500 to-blue-700 dark:from-gray-800 dark:to-gray-900 border border-transparent dark:border-gray-700 rounded-2xl p-4 sm:p-5 text-white shadow-lg overflow-hidden">
+
+            <div class="flex justify-between items-start gap-3 mb-4">
+
+              <div class="min-w-0">
+                <div data-i18n="currentWeather"
+                  class="text-[10px] sm:text-xs font-semibold opacity-70 uppercase tracking-widest mb-1">
+                  Current Weather
+                </div>
+
+                <div class="text-3xl sm:text-4xl font-black">
+                  28°C
+                </div>
+
+                <div data-i18n="weatherStatus"
+                  class="text-xs sm:text-sm opacity-80 mt-1 break-words">
+                  ☀️ Partly Sunny · Bhopal, MP
+                </div>
+              </div>
+
+              <div class="text-4xl sm:text-5xl flex-shrink-0">
+                ☀️
+              </div>
+            </div>
+
+            <!-- Weather Stats -->
+            <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-white border-opacity-20">
+
+              <div class="text-center">
+                <i data-lucide="droplets"
+                  class="mx-auto mb-1 opacity-70"
+                  style="width:14px;height:14px"></i>
+
+                <div class="text-sm font-bold">62%</div>
+
+                <div data-i18n="humidity"
+                  class="text-[10px] sm:text-xs opacity-60">
+                  Humidity
+                </div>
+              </div>
+
+              <div class="text-center">
+                <i data-lucide="wind"
+                  class="mx-auto mb-1 opacity-70"
+                  style="width:14px;height:14px"></i>
+
+                <div class="text-sm font-bold">14km/h</div>
+
+                <div data-i18n="wind"
+                  class="text-[10px] sm:text-xs opacity-60">
+                  Wind
+                </div>
+              </div>
+
+              <div class="text-center">
+                <i data-lucide="cloud"
+                  class="mx-auto mb-1 opacity-70"
+                  style="width:14px;height:14px"></i>
+
+                <div class="text-sm font-bold">15%</div>
+
+                <div data-i18n="rain"
+                  class="text-[10px] sm:text-xs opacity-60">
+                  Rain
+                </div>
+              </div>
+            </div>
+
+            <!-- Forecast -->
+            <div class="mt-4 overflow-x-auto">
+              <div class="grid grid-cols-5 gap-2 min-w-[320px]">
+
+                <div class="text-center bg-white bg-opacity-10 rounded-lg p-2">
+                  <div class="text-xs opacity-60">Mon</div>
+                  <div class="text-sm">⛅</div>
+                  <div class="text-xs font-bold">26°</div>
+                </div>
+
+                <div class="text-center bg-white bg-opacity-10 rounded-lg p-2">
+                  <div class="text-xs opacity-60">Tue</div>
+                  <div class="text-sm">☀️</div>
+                  <div class="text-xs font-bold">28°</div>
+                </div>
+
+                <div class="text-center bg-white bg-opacity-10 rounded-lg p-2">
+                  <div class="text-xs opacity-60">Wed</div>
+                  <div class="text-sm">🌧️</div>
+                  <div class="text-xs font-bold">24°</div>
+                </div>
+
+                <div class="text-center bg-white bg-opacity-10 rounded-lg p-2">
+                  <div class="text-xs opacity-60">Thu</div>
+                  <div class="text-sm">🌧️</div>
+                  <div class="text-xs font-bold">22°</div>
+                </div>
+
+                <div class="text-center bg-white bg-opacity-10 rounded-lg p-2">
+                  <div class="text-xs opacity-60">Fri</div>
+                  <div class="text-sm">⛅</div>
+                  <div class="text-xs font-bold">27°</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Soil -->
+          <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-4 sm:p-5 shadow-sm">
+            
+            <div class="flex items-center justify-between gap-3 mb-4">
+              
+              <h3 data-i18n="soilHealth"
+                class="font-bold text-gray-900 dark:text-white text-sm sm:text-base">
+                Soil Health
+              </h3>
+
+              <span data-i18n="good"
+                class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold whitespace-nowrap">
+                Good
+              </span>
+            </div>
+
+            <div class="space-y-3" id="bv-soil-bars"></div>
+
+            <div data-i18n="addNitrogen"
+              class="mt-4 p-3 rounded-xl text-xs sm:text-sm bg-green-50 text-green-800 dark:bg-gray-700 dark:text-gray-300 leading-relaxed">
+              💡 Add 20kg nitrogen fertilizer to Field A before next irrigation
+            </div>
+          </div>
+        </div>
+
+        <!-- Market + AI -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+
+          <!-- Chart -->
+          <div class="lg:col-span-2 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-4 sm:p-5 shadow-sm overflow-hidden">
+
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+
+              <h3 data-i18n="marketTrends"
+                class="font-bold text-gray-900 dark:text-white">
+                Market Price Trends
+              </h3>
+
+              <div class="flex flex-wrap gap-2 text-[10px] sm:text-xs text-gray-600 dark:text-gray-300">
+                
+                <span class="flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full inline-block"
+                        style="background:#2E7D32"></span>
+                  Wheat
+                </span>
+
+                <span class="flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full inline-block"
+                        style="background:#1565C0"></span>
+                  Rice
+                </span>
+
+                <span class="flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full inline-block"
+                        style="background:#FBC02D"></span>
+                  Soybean
+                </span>
+              </div>
+            </div>
+
+            <div class="w-full overflow-x-auto">
+              <div style="height:200px; min-width:300px">
+                <canvas id="bv-market-chart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Picks -->
+          <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-4 sm:p-5 shadow-sm">
+            
+            <div class="flex items-center justify-between mb-4">
+              
+              <h3 data-i18n="aiTopPicks"
+                class="font-bold text-gray-900 dark:text-white">
+                AI Top Picks
+              </h3>
+
+              <i data-lucide="bot"
+                 class="text-green-600"
+                 style="width:16px;height:16px"></i>
+            </div>
+
+            <div class="space-y-3" id="bv-crop-picks"></div>
+          </div>
+        </div>
+
+        <!-- Bottom Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-4 sm:p-5 shadow-sm">
+            
+            <h3 data-i18n="profitPrediction"
+              class="font-bold text-gray-900 dark:text-white mb-4">
+              Profit Prediction
+            </h3>
+
+            <div class="w-full overflow-x-auto">
+              <div style="height:160px; min-width:280px">
+                <canvas id="bv-profit-chart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-4 sm:p-5 shadow-sm">
+            
+            <h3 data-i18n="recentActivity"
+              class="font-bold text-gray-900 dark:text-white mb-4">
+              Recent Activity
+            </h3>
+
+            <div class="space-y-3" id="bv-activity"></div>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-4 sm:p-5 shadow-sm">
+            
+            <h3 data-i18n="notifications"
+              class="font-bold text-gray-900 dark:text-white mb-4">
+              Notifications
+            </h3>
+
+            <div class="space-y-3" id="bv-notif-cards"></div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div data-include="../ai-assistant/ai-assistant.html"></div>
+</div>
+
+<script src="../shared/data.js"></script>
+<script src="../shared/shell.js"></script>
+<script src="../sidebar/sidebar.js"></script>
+<script src="../navbar/navbar.js"></script>
+<script src="../ai-assistant/ai-assistant.js"></script>
+<script src="home.js"></script>
+<script>
+  // Personalize the welcome heading + subtitle with the logged-in user's data.
+  // Reacts to language switch in real time (greeting localized, name transliterated).
+  (function () {
+    function update() {
+      var el = document.getElementById("bv-welcome-heading");
+      var sub = document.getElementById("bv-welcome-sub");
+      var user = window.BV_AUTH && window.BV_AUTH.getUser();
+      var rawName = (user && user.name) ? user.name : "Kisan";
+      var I = window.BV_I18N;
+      var greet = I ? I.t("welcome") : "Welcome";
+      var displayName = I ? I.tName(rawName) : rawName;
+      if (el) el.textContent = greet + " " + displayName + " 🌱";
+      if (sub) {
+        if (user && user.village) {
+          var villageDisp = I ? I.tValue(user.village) : user.village;
+          var tmpl = I ? I.t("farmPerfDynamic") : "Your farm in {village} is performing 18% above average this season.";
+          sub.textContent = tmpl.replace("{village}", villageDisp);
+        } else if (I) {
+          sub.textContent = I.t("farmPerformance");
+        }
+      }
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", update);
+    } else {
+      update();
+    }
+    window.addEventListener("bv-auth-changed", update);
+    window.addEventListener("bv-language-changed", update);
+    window.addEventListener("bv-shell-ready", update);
+  })();
+</script>
+</body>
+</html>

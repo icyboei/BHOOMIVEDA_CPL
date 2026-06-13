@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Community — BhoomiVeda</title>
+  <link rel="icon" href="../assets/favicon.svg" />
+  <script src="../shared/tailwind-config.js"></script>
+  <script src="../shared/auth.js"></script>
+  <script src="../shared/language.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <link rel="stylesheet" href="../shared/shell.css" />
+  <link rel="stylesheet" href="../shared/theme.css" />
+  <link rel="stylesheet" href="../sidebar/sidebar.css" />
+  <link rel="stylesheet" href="../navbar/navbar.css" />
+  <link rel="stylesheet" href="../ai-assistant/ai-assistant.css" />
+  <link rel="stylesheet" href="community.css" />
+</head>
+<body data-protected="true" data-page="community" data-page-title="Community" data-page-title-key="community" class="bg-gray-50 dark:bg-gray-950">
+<div class="flex h-screen overflow-hidden">
+  <div data-include="../sidebar/sidebar.html" class="hidden md:flex"></div>
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <div class="flex items-center md:hidden px-4 py-3 border-b bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800">
+      <button class="p-2 rounded-lg"><i data-lucide="menu"></i></button>
+      <div class="flex items-center gap-2.5 ml-2 min-w-0">
+        <div class="h-8 w-8 overflow-hidden flex-shrink-0">
+          <img src="../assets/bhoomiveda-logo.png" alt="" class="w-full h-[200%] max-w-none object-contain object-top" />
+        </div>
+        <span class="font-extrabold uppercase tracking-[0.14em] leading-none text-xs text-gray-900 dark:text-white">
+          Bhoomi<span class="text-green-600">Veda</span>
+        </span>
+      </div>
+    </div>
+    <div data-include="../navbar/navbar.html"></div>
+    <main class="flex-1 overflow-y-auto">
+<div class="bg-gray-50 dark:bg-gray-900 min-h-screen p-6">
+  <!-- Header -->
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h2 class="text-2xl font-black text-gray-900 dark:text-white" data-i18n="communityTitle">🤝 Farmer Community</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-1" data-i18n="communitySubtitle">Connect, share, and grow together</p>
+    </div>
+    <div class="flex items-center gap-2 px-3 py-2 rounded-xl border bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700 text-sm">
+      <i data-lucide="search" class="text-gray-500 dark:text-gray-400" style="width:14px;height:14px"></i>
+      <input data-i18n-attr="placeholder:searchPosts" placeholder="Search posts..." class="outline-none bg-transparent text-sm text-gray-900 dark:text-white w-32" />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Feed -->
+    <div class="lg:col-span-2 space-y-5">
+      <!-- Composer -->
+      <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 shadow-sm">
+        <div class="flex gap-3">
+          <div class="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">RJ</div>
+          <div class="flex-1">
+            <textarea id="bv-new-post" data-i18n-attr="placeholder:composerPlaceholder" placeholder="Share your farming experience, tips, or ask a question..."
+              class="w-full text-sm resize-none outline-none bg-transparent text-gray-900 dark:text-white placeholder-gray-400 h-16"></textarea>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
+              <div class="flex gap-3">
+                <button class="text-xs text-gray-500 dark:text-gray-400 hover:text-green-600 flex items-center gap-1 transition-colors"><i data-lucide="camera" style="width:14px;height:14px"></i><span data-i18n="photo">Photo</span></button>
+                <button class="text-xs text-gray-500 dark:text-gray-400 hover:text-green-600 flex items-center gap-1 transition-colors"><i data-lucide="map-pin" style="width:14px;height:14px"></i><span data-i18n="location">Location</span></button>
+              </div>
+              <button class="bg-green-600 text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-green-700 transition-colors flex items-center gap-1.5"><i data-lucide="send" style="width:12px;height:12px"></i><span data-i18n="post">Post</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="bv-posts" class="space-y-5"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="space-y-5">
+      <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 shadow-sm">
+        <h3 class="font-bold text-gray-900 dark:text-white mb-4" data-i18n="trendingTopics">🔥 Trending Topics</h3>
+        <div class="space-y-2" id="bv-trending"></div>
+      </div>
+      <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 shadow-sm">
+        <h3 class="font-bold text-gray-900 dark:text-white mb-4" data-i18n="askExperts">👨‍🔬 Ask Experts</h3>
+        <div class="space-y-3" id="bv-experts"></div>
+        <button data-i18n="askQuestionBtn" class="mt-3 w-full border border-dashed border-green-400 text-green-600 py-2 rounded-xl text-xs font-semibold hover:bg-green-50 transition-colors">+ Ask a Question</button>
+      </div>
+      <div class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 shadow-sm">
+        <h3 class="font-bold text-gray-900 dark:text-white mb-4" data-i18n="topFarmers">🏆 Top Farmers</h3>
+        <div class="space-y-2" id="bv-leaderboard"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    </main>
+  </div>
+  <div data-include="../ai-assistant/ai-assistant.html"></div>
+</div>
+<script src="../shared/data.js"></script>
+<script src="../shared/shell.js"></script>
+<script src="../sidebar/sidebar.js"></script>
+<script src="../navbar/navbar.js"></script>
+<script src="../ai-assistant/ai-assistant.js"></script>
+<script src="community.js"></script>
+</body>
+</html>

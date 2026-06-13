@@ -1,0 +1,50 @@
+<!-- ============================================================
+     NAVBAR — top bar with page title, language switcher,
+     dark-mode toggle, notifications dropdown, and auth controls.
+     navbar.js renders the right-side auth UI based on BV_AUTH state.
+     ============================================================ -->
+<header class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 px-6 py-3.5 flex items-center justify-between sticky top-0 z-40">
+  <div>
+    <h1 id="bv-page-title" class="font-bold text-base text-gray-900 dark:text-white">Dashboard</h1>
+    <p class="text-xs text-gray-500 dark:text-gray-400" data-i18n="platformTagline">BhoomiVeda Platform</p>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <!-- Global language switcher -->
+    <select class="bv-lang-switcher bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs sm:text-sm px-2 sm:px-3 py-2 rounded-xl outline-none text-gray-700 dark:text-white"
+            aria-label="Language">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+    </select>
+
+    <!-- Dark/Light mode toggle -->
+    <button id="bv-dark-toggle"
+            class="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            title="Toggle theme" aria-label="Toggle theme">
+      <i data-lucide="moon" class="bv-icon-light"></i>
+      <i data-lucide="sun"  class="bv-icon-dark"></i>
+    </button>
+
+    <!-- Notifications (visible only when logged in) -->
+    <div class="relative" id="bv-notif-wrap">
+      <button id="bv-notif-btn"
+              class="p-2 rounded-xl relative bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+        <i data-lucide="bell"></i>
+        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-gray-900"></span>
+      </button>
+      <div id="bv-notif-panel"
+           class="hidden absolute right-0 top-11 w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-2xl z-50 overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+          <span class="font-bold text-sm text-gray-900 dark:text-white" data-i18n="notifications">Notifications</span>
+          <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">
+            4 <span data-i18n="newCount">new</span>
+          </span>
+        </div>
+        <div id="bv-notif-list"></div>
+      </div>
+    </div>
+
+    <!-- Auth controls (login/signup OR profile/logout). Rendered by navbar.js -->
+    <div id="bv-auth-controls" class="flex items-center gap-2"></div>
+  </div>
+</header>

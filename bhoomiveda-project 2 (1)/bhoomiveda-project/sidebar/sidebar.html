@@ -1,0 +1,29 @@
+<!-- ============================================================
+     SIDEBAR — navigation column (desktop) / drawer (mobile).
+     Active link is highlighted by sidebar.js using the
+     `data-page` attribute on the <body> of the current page.
+     ============================================================ -->
+<aside id="bv-sidebar"
+       class="bv-sidebar bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 flex flex-col w-60 flex-shrink-0">
+  <!-- Logo -->
+  <div class="flex items-center border-b border-gray-100 dark:border-gray-800 px-5 py-4" data-sidebar-logo>
+    <div class="h-9 w-9 overflow-hidden flex-shrink-0">
+      <img src="../assets/bhoomiveda-logo.png" alt="" aria-hidden="true"
+           class="w-full h-[200%] max-w-none object-contain object-top select-none" />
+    </div>
+    <span data-sidebar-name
+          class="ml-2.5 font-extrabold uppercase tracking-[0.14em] leading-none whitespace-nowrap text-sm text-gray-900 dark:text-white">
+      Bhoomi<span class="text-green-600">Veda</span>
+    </span>
+  </div>
+
+  <!-- Nav -->
+  <nav class="flex-1 py-4 px-3 space-y-1.5 overflow-y-auto" id="bv-sidebar-nav">
+    <a href="../home/index.html"        data-nav="dashboard"  class="bv-link"><i data-lucide="home"></i>            <span data-i18n="dashboard">Dashboard</span></a>
+    <a href="../ai-crop/index.html"     data-nav="ai-crop"    class="bv-link"><i data-lucide="bot"></i>             <span data-i18n="aiCropAdvisor">Soil & AI Recommendation</span></a>
+    <a href="../ask-expert/index.html"  data-nav="ask-expert" class="bv-link"><i data-lucide="message-circle-question"></i><span data-i18n="askExpert">Ask Expert</span></a>
+    <a href="../community/index.html"   data-nav="community"  class="bv-link"><i data-lucide="users"></i>           <span data-i18n="community">Community</span></a>
+    <a href="../schemes/index.html"     data-nav="schemes"    class="bv-link"><i data-lucide="file-text"></i>       <span data-i18n="govSchemes">Gov. Schemes</span></a>
+    <a href="../profile/index.html"     data-nav="profile"    class="bv-link"><i data-lucide="user"></i>            <span data-i18n="profile">Profile</span></a>
+  </nav>
+</aside>

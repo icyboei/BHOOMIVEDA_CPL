@@ -1,0 +1,9 @@
+/* ============================================================
+   SCHEMES.CSS — chip + card hover styling.
+   ============================================================ */
+.bv-cat { padding: .375rem 1rem; border-radius: 9999px; font-size: .875rem; font-weight: 600; transition: all .2s; }
+.bv-cat:not(.active) { background: #fff; border: 1px solid rgb(229 231 235); color: rgb(75 85 99); }
+.dark .bv-cat:not(.active) { background: rgb(31 41 55); border-color: rgb(55 65 81); color: rgb(209 213 219); }
+.bv-cat.active { background: rgb(22 163 74); color: #fff; }
+.bv-scheme { transition: all .3s ease; }
+.bv-scheme:hover { box-shadow: 0 10px 24px -16px rgba(0,0,0,.18); }
